@@ -1,0 +1,196 @@
+﻿*{
+		box-sizing:border-box;
+
+	}
+body {
+    margin: 0;
+    background-color:#e6daa6;
+}
+.globe{position:absolute;
+	    display:flex;
+	}
+
+.globe> image{float: left;}	
+	
+.parent{
+	
+	display:flex;
+	width:65%;
+
+	/*flex-direction:  column;
+	flex-wrap: nowrap */
+	flex-flow: column nowrap;
+	position:relative;
+	background-color: DodgerBlue;
+	padding:0;
+        margin:  0 auto ;
+	
+
+}
+
+.parent> div:not(:first-child)  {
+	
+	 background-color: #f1f1f1;
+	 text-align: center;
+	 margin: 4px;
+	 
+}
+
+@keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+
+.parent> div:first-child {
+	
+	 background-color: "#AAF0D1";
+	 text-align: center;
+	 margin: 4px;
+	 
+	animation-name: example;
+        animation-duration: 2s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+	
+}
+
+@keyframes  text2 {
+	
+       from {color: red;}
+  to {color: #336699;}
+	}
+.child.child2 {
+	/*-webkit-animation:colorchange 16s infinite alternate; */
+	color: black;
+	font-size: 32px;
+	font-weight: 120;
+	animation:text2 4s infinite alternate;
+	
+	animation-name: text2;
+        animation-duration: 4s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+	
+}
+
+.child.child3 >h1{
+	color:green;
+	animation: textmove 3s infinite;
+} 
+@keyframes textmove {
+  50% {padding-left: 160px;}
+  
+}
+	
+.container{
+	display:grid;
+	grid-template-columns:repeat(auto-fill, minmax(0, 1fr));
+	grid-template-rows:reapeat(11,  12px);
+	width:94%;
+	height:98%;
+	margin: 0 auto;
+	background-color:red;
+	column-gap: 10px;
+         row-gap: 15px;
+	 
+	align-content:center;
+	justify-content:center;
+}
+
+.item{
+	
+	justify-self: stretch;
+	border: 5px solid yellow;
+	text-align:center;
+	
+	min-width: 0;
+min-height: 0;
+overflow: hidden;
+	
+	
+}
+
+.item1{
+	grid-column:1/ 12;
+	grid-row:1/2;	
+	background-color:#94ac02;	
+}
+
+.item1 >div:nth-child(odd) img{
+	float:left; 
+	
+	object-fit: contain;
+}
+
+.item1 >div:nth-child(even) img{
+	
+	float:left; 
+	object-fit: contain;
+	position: absolute;
+	-webkit-animation: linear infinite;
+	-webkit-animation-name: run;
+	-webkit-animation-duration: 7s;
+}
+@-webkit-keyframes run {
+ 0% {
+    left: 15%;
+    transform: rotateY(0deg);
+  }
+  49% {
+      transform: rotateY(0deg);
+  }
+  50% {
+      left: 85%;
+      transform: rotateY(180deg);
+  }
+  100% {
+       left: 15%;  
+       transform: rotateY(180deg);
+  }
+}
+
+.item2{
+	
+	width:400px; /* or whatever width you want. */
+        max-width:400px; /* or whatever width you want. */
+      
+	grid-column:1/6;
+	grid-row:2/9;
+	
+}
+
+.item4{	
+	grid-column:6/12;
+	grid-row:2/7;
+}
+
+.item3{	
+	grid-column:6/12;
+	grid-row:8/9;
+	
+	justify-content:center;
+}
+
+
+
+.item5{	
+	grid-column:1/12;
+	grid-row:10/11;
+}
+
+
+#container{
+		background-color:#ccff33;
+		padding:12px;
+		max-width: 80%;
+		max-height:80%;
+		margin: 0 auto;
+	
+	}	
+	
+canvas{
+	position: relative;
+	width:100%;
+	height:auto;
+	
+}	

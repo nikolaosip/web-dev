@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="vieport" content="width=device-width, initial-scale=1.0">
+		<meta name="keywords" content="HTML, CSS, JavaScript">
+		<link rel="stylesheet" type="text/css" href="styleSec.css">
+		
+		<title>secondpage</title>
+	</head>
+	<body>
+
+		<div class="myhead">
+		        <h1>My second Page</h1>
+		</div>	
+		
+		<div class="myGrid">
+			<div class="item item1" id="exc_1">item 1
+				<div class="one">
+						  <canvas id="myCanvas"  style ="border:4px solid #cc0066; background-color: #f0f5f5">Your browser does not support the canvas element.</canvas>
+				</div>
+			</div>		
+					<script>		
+				
+				      var elmnt=document.getElementById("exc_1");
+			
+					var cw= 0.94*elmnt.clientWidth;
+					//var	ch=elmnt.clientHeight;
+					
+					var canvas1 = document.getElementById("myCanvas"); 
+					var ctx = canvas1.getContext("2d");
+					myCanvas.width = cw;
+					myCanvas.height=cw;
+						 
+					var w = cw;
+					var h = cw;	
+						var major=80, minor=30;
+						var ff= 0;			
+					
+					(function animate(){
+					   
+					    ctx.save();
+					    ctx.clearRect(0,0, w,h);
+				
+				ctx.translate(w/2 , h/2);
+						ctx.rotate(ff*Math.PI/60 );
+						ctx.translate( -w/2 , -h/2 );			  
+									
+					    ctx.beginPath();				
+						ctx.ellipse(w/2-2*major , h/2 ,major, minor,  0 ,Math.PI*2, false);
+						ctx.stroke();
+						
+						ctx.beginPath();				
+						ctx.ellipse(w/2+2*major , h/2 ,major, minor,  0 ,Math.PI*2, false);
+						ctx.stroke();
+						
+						ctx.beginPath();
+						ctx.moveTo(w/2 - 2*major, h/2);
+						ctx.lineTo(w/2 + 2*major, h/2);
+						ctx.stroke();
+						
+						ctx.beginPath();				
+						ctx.ellipse(w/2 , h/2-2*major ,  minor, major, 0 ,Math.PI*2, false);
+						ctx.stroke();
+						
+						ctx.beginPath();				
+						ctx.ellipse(w/2 , h/2+2*major , minor, major,   0 ,Math.PI*2, false);
+						ctx.stroke();
+						
+						ctx.beginPath();
+						ctx.moveTo(w/2 , h/2 - 2*major);
+						ctx.lineTo(w/2 , h/2 + 2*major);
+						ctx.stroke();
+						
+						ff+=.1;
+						
+						ctx.restore();	
+						myText()
+						lines();
+				requestAnimationFrame(animate);				
+						
+						})();
+						
+						function lines(){
+						    ctx.beginPath();
+							ctx.moveTo(w/2,0);
+							ctx.lineTo(w/2, h);
+							ctx.stroke();
+							
+							ctx.beginPath();
+							ctx.moveTo(0,h/2);
+							ctx.lineTo(w, h/2);
+							ctx.stroke();
+						}
+						
+						function myText(){
+						    ctx.font= "bold 26px  Tahoma";
+							ctx.textAlign = "center";
+				                    ctx.fillStyle= "red";
+							ctx.fillText('RequestAnimationFrame',w/2, 1*h/12);
+						}		
+				
+					</script>
+				
+			<div class="item item2" id="exc_2">item 2
+			
+				<div class="two">
+				       <p><img src="https://tinyurl.com/2p8bj33f" > </p>
+				</div>
+			</div>
+			
+			<div class="item item3" id="ecx_3">item 3
+				<div class="three">
+					<canvas id="myCanvas5"  style="border:4px solid #cc0066; background-color: #ffe6cc"></canvas>
+				</div>
+			</div>
+			
+				  <script>
+					
+					var elmnt5=document.getElementById("ecx_3");
+			
+					var cw5= 0.9*elmnt5.clientWidth;
+					var ch5=0.6*elmnt.clientHeight;
+					
+					var canvas5 = document.getElementById("myCanvas5"); 
+					var ctx5 = canvas5.getContext("2d");
+					myCanvas5.width = cw5;
+					myCanvas5.height=ch5;
+						 
+					var w5 = cw5;
+					var h5 = ch5;	
+					
+					
+					
+					var f=0, fx=0,fy=0, rot=0;
+					var v=1;
+					var stones=[], smokes=[];
+					var colors= ["#996633", "#e6ac0", "#b36b00", "#660000", "#c2c2d6","#55552b" ];
+					var front=true, back=false;
+					var smCol=["#B0B0B0", "#c2c2d6"];		
+
+						
+					function Car(x,y,m){
+						this.x = x;
+						this.y = y;
+						this.m = m;
+						this.r=m*Math.sqrt(2);
+						var climax= this.m/6;
+						var ccol=1;
+						
+						
+						this.show= function(){
+
+							
+							var w15= new Weal(this.x+ 2.2*v*climax, this.y+ this.m, 2.2, v);
+							var w25= new Weal(this.x +7*v*this.m/3 , this.y+ this.m, 2.2, v);
+							
+							
+							ctx5.save();
+							
+							ctx5.beginPath();
+							ctx5.fillStyle="#008080";
+							ctx5.lineWidth=4;
+							ctx5.lineCap = "round";	
+							ctx5.strokeStyle= "#cc0052";
+
+							//if(front==true && back==false)
+							ctx5.fillRect(this.x, this.y , 2*v*this.m, this.m);
+							ctx5.fillRect(this.x +2*v*this.m+4*v, this.y +this.m/2, v*this.m/3, this.m/2);
+							ctx5.fillRect(this.x +2*v*this.m+4*v +v*this.m/3, this.y +this.m/2+this.m/4, v*this.m/4, this.m/4);
+							
+							ctx5.fill();
+							ctx5.stroke();
+							
+							ctx5.clearRect(this.x + 1.2*v*climax, this.y+ .86*this.m, 2*v*climax, climax);
+							ctx5.clearRect(this.x + 6.55*v*this.m/3 , this.y+ 0.86*this.m, 1.7*v*climax, climax);
+						
+							
+							w15.show();
+							w15.move();
+							
+							w25.show();
+							w25.move();
+							
+							for(var i=0; i<2; i++){
+							
+								
+								var sm= new Smoke(this.x-v*12, this.y +this.m+4, ccol);
+								smokes.push(sm);
+						
+							}
+						
+							for(var i=0; i<smokes.length; i++){
+								smokes[i].show();
+								smokes[i].move();
+								
+							}
+						
+							for(var i=0; i<smokes.length; i++){
+								
+								if(smokes[i].life<=0){
+									smokes.splice(i,1);
+								
+								}
+						
+							}  
+						
+						    };
+							
+							
+							this.move= function(){
+							
+								
+								if(this.x >w5+12 || this.x<-12){
+									//this.x =
+									v=-v;
+									
+								}
+								this.x+=2*v;
+
+								ccol= 0.5*v*v - 0.5*v;	
+							
+							};
+						
+					}
+						
+					function Weal(x,y, r, direction){
+						this.x = x;
+						this.y = y;
+						this.r=r;
+						this.direction=direction;	
+						this.show= function(){
+						
+							for(var i=0; i<18; i++){				
+								
+								ctx5.beginPath();				
+								ctx5.strokeStyle= "black";
+								ctx5.lineWidth=8;
+								ctx5.moveTo(this.x+ (this.r+8)*Math.cos(i*Math.PI/9-f), this.y+ (this.r+8)*Math.sin(i*Math.PI/9-f));
+								ctx5.lineTo(this.x+ (this.r+18)*Math.cos(i*Math.PI/9-f), this.y+ (this.r+18)*Math.sin(i*Math.PI/9-f));
+								ctx5.stroke();
+							
+							}
+						
+							ctx5.beginPath();				
+							ctx5.strokeStyle= "#3c3c5d";
+							ctx5.lineWidth=28;				
+							ctx5.arc(this.x, this.y, this.r, f, 2*Math.PI+f, false );
+							ctx5.stroke(); 
+							
+							ctx5.beginPath();				
+							ctx5.strokeStyle= "#74254d";
+							ctx5.lineWidth=4;				
+							ctx5.arc(this.x, this.y, this.r, f, Math.PI+f, false );
+							ctx5.stroke();				
+							
+							ctx5.beginPath();				
+							ctx5.strokeStyle= "#4d1933";
+							ctx5.lineWidth=4;				
+							ctx5.arc(this.x, this.y, this.r, Math.PI+f, 2*Math.PI+f, false );
+							ctx5.stroke();
+							
+							
+							ctx5.beginPath();				
+							ctx5.strokeStyle= "#9494b8";
+							ctx5.lineWidth=14;				
+							ctx5.arc(this.x, this.y, this.r/4, 21*Math.PI/20+f, 2*Math.PI+f, false );
+							ctx5.stroke();
+							
+							ctx5.beginPath();				
+							ctx5.strokeStyle= "#666699";
+							ctx5.lineWidth=14;				
+							ctx5.arc(this.x, this.y, this.r/4, Math.PI/50+f, Math.PI+f, false );				
+							ctx5.stroke();
+											
+						};
+						
+						this.move= function(){
+							f+=0.3141592*this.direction;
+						
+						};
+					
+					}
+					
+					function Smoke(x,y, n){
+					
+						this.x= x;
+						this.y= y;
+						this.life= 80+ 50*Math.random();
+						this.r= 3+ 4*Math.random();	
+						this.n=n;	
+						this.color = smCol[this.n];	
+						
+						this.show= function(){
+						
+							var p1x= this.x+ this.r*Math.cos(0 +rot);
+							var p1y= this.y+ this.r*Math.sin(0+ rot);
+							var p2x= this.x+ this.r*Math.cos(2*Math.PI/3 + rot);
+							var p2y= this.y+ this.r*Math.sin(2*Math.PI/3 + rot);
+							var p3x= this.x+ this.r*Math.cos(4*Math.PI/3 + rot);
+							var p3y= this.y+ this.r*Math.sin(4*Math.PI/3 + rot);		
+						
+							var startAngle12 = Math.atan2(p1y - this.y , p1x - this.x),
+								endAngle12   = Math.atan2(p2y - this.y , p2x - this.x);
+
+							var startAngle13 = Math.atan2(p1y - this.y , p1x - this.x),
+								endAngle13   = Math.atan2(p3y - this.y , p3x - this.x);
+
+							var startAngle23 = Math.atan2(p2y - this.y , p2x - this.x),
+								endAngle23   = Math.atan2(p3y - this.y , p3x - this.x);		
+								
+							ctx5.beginPath();				
+							ctx5.strokeStyle= smCol[this.n];	
+							ctx5.fillStyle= smCol[this.n];	
+							ctx5.lineWidth=.5;				
+							
+								
+							ctx5.arc(this.x+ this.r*Math.cos(0), this.y+ this.r*Math.sin(0), this.r, 0+ rot, 2*Math.PI+rot, false );
+							ctx5.arc(this.x+ this.r*Math.cos(2*Math.PI/3), this.y+ this.r*Math.sin(2*Math.PI/3), this.r, 0 + rot, 2*Math.PI + rot, false );
+							ctx5.arc(this.x+ this.r*Math.cos(4*Math.PI/3), this.y+ this.r*Math.sin(4*Math.PI/3), this.r, 0 + rot, 2*Math.PI +rot, false );
+							
+							
+							ctx5.fill();
+							ctx5.stroke();
+							
+						
+						
+						};
+						
+						this.move= function(){
+							fx+=0.3141592;
+							
+							this.x = this.x +2*Math.random()*Math.cos(fx);
+							this.y = this.y +6*Math.random()*Math.sin(fx)-0.2;
+							
+							this.life--;
+							
+							rot+= 0.00003141592;
+							
+							
+									
+						};
+					
+					
+					}
+					
+							
+					var p =new Car(w5/2-120, h5/2, 180);
+					
+					var sOb =new Smoke(w5/2, h5/2, 1);
+					
+						
+					
+					
+					function draw5(){
+						
+						ctx5.clearRect(0, 0,w5, h5);
+						
+						//sOb.show();
+						
+						
+						p.show();
+						p.move();
+						
+						//p2.show();
+						//p2.move();
+						
+						ctx5.restore();
+						
+					 }
+					setInterval(draw5, 20);
+
+			    </script>
+		
+		</div>
+		
+		<div class="end">
+			<p><h1><a href="index.html"   >Return to the first page</a> </h1></p>
+		
+		</div>
+
+	</body>
+</html>

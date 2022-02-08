@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta charset="utf-8"/>
+		<meta name="vieport" content="width=device-width, initial-scale=1.0">
+		<meta name="keywords" content="HTML, Canvas, CSS, JavaScript">
+		<meta name="author" content="nikolaosip">
+
+		<title>Web2</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<style>
+	
+	
+	
+	
+	
+	#second_container, canvas{
+		padding:0;
+		width:100%;
+		margin: 0 auto;
+		display:absolute;
+	
+	}
+	fieldset input{
+	
+		width:82px;
+		height:64px;
+		font: bold 28px Tahoma;
+		text-align:right;
+		
+		overflow: visible;
+		number-overflow: visible; 
+		border: 3px solid #0450ff;
+	}
+	#answer, #demo{
+	
+		background-color:yellow;
+	         max-width:560px
+		display:flex;
+		flex-wrap:wrap;
+		 word-wrap: break-word;
+	
+	}
+	
+	
+	</style>
+  
+  
+  
+  </head>
+  <body>
+		<div class="globe">
+			<img src="earth.gif" alt="globe" width="160" height="160">
+		</div>
+		<div class="parent">
+			 <div class="child child1">
+				 <h1>Welcome to my page</h1>
+			 </div>
+			 <div class="child child2">
+				 HTML, CSS, Javascript and Canvas all in action
+			</div>
+			<div class="child child3">
+				<h1>check the code and find how</h1>
+			</div>
+			<div class="child child4">
+				<h1>Don't hesitate to contact
+					<p><a href="mailto:nikolaosip@gmail.com">email me</a></p>
+				</h1>
+			</div>
+
+		</div>
+		
+<!--     ................................ GRID ......................................................................... -->		
+
+		<div class="container">
+			<div class="item item1">
+				
+				<div>
+					<img src="hex.gif" alt="mine" width="150" height="120">
+				</div>
+				<div>	
+					<img src="Layer 4.png" alt="mine" width="120" height="120">
+				</div>	
+				<h1>item1</h1>
+			<!--	<p><img id="sat" src="Y=s240-no?authuser=0.jpg" alt="Earth"  -->		
+	          </div>
+			<div class="item item2">
+				<h1>item2</h1>
+				
+	<!-- ................................................................................................	-->		
+				<div id="container">	
+	<h2> Collatz conjecture-sequence  &nbsp (3x+1 problem)</h2>
+	
+	<form>
+		<fieldset>
+			<legend><big><strong>Write an integer </strong></big></legend>
+			<h1>n: <input type="number" id="num_x" onfocus="this.value=''" value="7"></h1>
+		</fieldset>
+	</form>
+	
+	<div id="but">
+		<p><h3>Click the button to get the Collatz sequence of this number.<h3></p>
+		<button onclick="myFunction()" id="roots">Calculate</button>
+		<button onclick="resetFunction()" ><strong>Reset</strong></button>
+		
+	</div>
+	
+	<div id="answer">
+		
+		<h3><p id="demo"></p></h3>
+			
+	</div>
+		
+	</div>
+	
+	
+	<script>
+		var terminal;
+		var n, col;
+		var seq=[];
+		var t=6;
+		
+		class Collatz {
+			constructor(x){
+				this.num=x;
+			}
+			step(){
+				if(this.num%2==0)
+				{   this.num =0.5*this.num;
+					return this.num;	
+				
+				}
+				
+				else{
+					this.num =3*this.num + 1;
+					return this.num;	
+				
+				}
+			
+			
+			}
+		
+		
+		}
+		
+	
+	
+		function myFunction() {
+			var xa = document.getElementById("num_x").value;
+			if(xa>0){	
+				while(xa>1){			
+					seq.push(xa);
+					//document.getElementById("demo").innerHTML = xa+',&nbsp';
+					terminal = new Collatz(xa);
+					xa=terminal.step();
+					}
+						
+				//document.getElementById("demo").innerHTML =xa+'.';		
+				seq.push(xa);
+				 document.getElementById("demo").style.flexWrap = "wrap";
+				document.getElementById("demo").innerHTML = seq;
+			}
+			
+			else{document.getElementById("demo").innerHTML = "write a positive integer";}
+			seq=[];
+		}
+		
+		function resetFunction(){
+			seq=[];
+			//for(var i=0; i<seq.length; i++){seq[i]='';};
+			document.getElementById("num_x").value ='';
+			document.getElementById("demo").innerHTML = '';				
+			
+			}
+	</script>
+	
+	<!-- .................................................... -->	
+	
+			</div>
+			
+			<div class="item item3" id="itemn2">
+				<div id="over"><h3>item3</h3></div>
+				
+				
+                            <canvas id="my_Canvas"  style ="border:4px solid #cc0066; background-color:#b3c6ff"></canvas>
+	
+		
+      <script>
+      
+				
+	  
+	    var elmnt2=document.getElementById("itemn2");
+			
+		var cw2= 0.9*elmnt2.clientWidth;
+		var	ch2=0.4*elmnt2.clientHeight;
+		my_Canvas.width= cw2;
+		my_Canvas.height=ch2;
+	  
+	  	 
+		 
+         // both work   
+		 var canvas2 = document.getElementById("my_Canvas"); 
+           //var canvas = document.querySelector("#myCanvas");
+              var ctx2 = canvas2.getContext("2d");
+		var motionTrailLength = 64;
+		var positions = [];
+            var xPos = 0;
+            var yPos = ch2/2; 
+			
+			function storeLastPosition(xPos, yPos) {
+			  // push an item
+					positions.push({
+						x: xPos,
+						y: yPos
+						
+					 });
+					 
+					  //get rid of first item
+					  if (positions.length > motionTrailLength) {
+					  
+						positions.shift();
+					  }
+			}
+
+			function update(){
+			
+			    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+				
+				for(var j = 0; j < positions.length; j++) {
+				
+				    var ratio = (j + 1) /(2*positions.length);
+				
+					ctx2.beginPath();
+					ctx2.lineWidth=.05;
+					ctx2.strokeStyle= "yellow";
+					ctx2.arc(positions[j].x-25, positions[j].y, 20+j, 0, 2*Math.PI, true);
+					ctx2.fillStyle = "rgba(204, 102, 153, " + ratio / 2 + ")";
+					ctx2.stroke();
+					ctx2.fill();
+				 }
+				
+				ctx2.beginPath();
+			      ctx2.arc(xPos, yPos, 20, 0, 2*Math.PI, true);
+				ctx2.fillStyle ="#ff0000";
+				ctx2.fill();
+				
+				storeLastPosition(xPos, yPos);
+				
+				if(xPos>680){
+				    xPos = 0;
+				
+				}
+				xPos +=3;
+				requestAnimationFrame(update);
+			}
+            update();			
+			
+			
+			
+			
+				
+		</script>
+			</div>
+			
+			<!--  .................................  -->
+			
+			<div class="item item4" id="itemn">
+				<h1>item4</h1>
+		
+
+		
+		<div id="second_container">
+	   
+	              <canvas id = "myCanvas"  style = "border:8px solid #993300; background:	rgba(230, 254, 254, 1); "></canvas>
+		</div>
+		</div>	
+			<script>
+			
+			      var elmnt=document.getElementById("itemn");
+			
+				var  cw= 0.9*elmnt.clientWidth;
+				var	ch=0.9*elmnt.clientHeight;
+				myCanvas.width= cw;
+				myCanvas.height=ch;
+					var canvas = document.getElementById("myCanvas"); 
+					var ctx = canvas.getContext("2d");
+				var w1 = cw;
+				var h1 = ch;				
+			      
+                          
+				var ar=[];
+				var n=40;
+			  	
+				
+				function Circle(x,y,dx,dy,radius){
+				       this.x =x;
+					this.y=y;
+					this.dx=dx;
+					this.dy=dy;
+					this.radius=radius;
+					
+					this.draw= function(){
+					      ctx.beginPath();
+						ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
+						ctx.strokeStyle= "#f90606";
+						ctx.stroke();
+					};
+					
+					this.update= function(){
+					    if(this.x+this.radius>w1 || this.x-this.radius<0){
+					        this.dx =-this.dx;
+						}
+						if(this.y+this.radius>h1 || this.y-this.radius<0){
+							this.dy =-this.dy;
+					    }
+					
+					    this.x+=this.dx;
+						this.y+=this.dy;
+						//this.draw();
+					};
+				
+				
+				};
+				
+				for(var j=0; j<n; j++){
+				
+					  var radious = Math.random()*w1/16+ 2;
+					  var x= Math.random()*(w1 -2*radious) + radious;
+						var y= Math.random()*(h1 -2*radious) + radious;
+						var dx= 4*Math.random()-2;
+						var dy= 4*Math.random()-2;
+				
+				    var c = new Circle(x, y,dx,dy, radious);
+					ar.push(c);
+				    
+				}
+				
+				
+				
+				(function animate(){
+				   
+					ctx.clearRect(0,0,w1,h1);
+					
+					for(var j=0; j<ar.length; j++){
+					    ar[j].draw();
+					    ar[j].update();
+					}
+					
+					requestAnimationFrame(animate);
+			
+				
+				})();
+										
+			</script>		
+		<!--  .....................................  -->
+				
+				
+				
+				
+			
+			<div class="item item5" id="itemn5">
+				<h1>item5</h1>
+		<canvas id="canvas_2"  style="border:4px solid #cc0066; background-color:yellow"></canvas>		
+				<script>
+				
+				 var elmnt5=document.getElementById("itemn5");
+			
+		//var cw5= 0.6*elmnt5.clientWidth;
+		var	ch5=0.2*elmnt5.clientHeight;
+		var cw5= 4*Math.PI*ch5;
+		canvas_2.width= cw5;
+		canvas_2.height=ch5;
+		var canvas5 = document.getElementById('canvas_2');
+		var ctx5= canvas5.getContext('2d');
+
+		var w= canvas5.width;
+		var h= canvas5.height;
+		var theta1=0, motion=0, cx=1, f=0;
+		
+			  
+		function Lines5(x1,y1,n,l){
+			this.x1 = x1;
+			this.y1 = y1;
+			this.n = n;
+			this.l= l;
+			this.dist= (this.l/this.n);
+			
+			this.show= function(){				
+				
+				ctx5.beginPath();
+				ctx5.strokeStyle= "#cc33ff";
+				ctx5.lineWidth=6;
+				
+				for(var i=0; i<this.n; i++){
+				
+				ctx5.moveTo(this.x1 -0.5*this.l+7+(i-0)*this.dist, this.y1);     //-0.5*this.l+7
+				ctx5.lineTo(this.x1 -0.5*this.l+7+(i-0)*this.dist, this.y1 + 46*Math.sin((i*Math.PI/(this.x1-0.5*this.l))*f +7));				
+				ctx5.stroke(); 
+				}
+				
+			};
+			
+			this. move= function(){
+				theta1+= 0.03141592/2;
+				
+				f= (4*Math.PI*Math.sin(theta1));
+				
+			};
+			
+			
+		}
+					
+		
+		
+		function BaseLine5(x,y,log){
+		
+			this.x= x;
+			this.y= y;
+			this.log= log;
+			
+			this.show = function(){
+			
+				ctx5.beginPath();
+				ctx5.strokeStyle="red";
+				ctx5.fillStyle= "#ff9999";
+				ctx5.lineWidth= 16;	
+				ctx5.moveTo(this.x - 0.5*this.log, this.y);
+				ctx5.lineTo(this.x + 0.5*this.log, this.y);
+				
+				ctx5.stroke();
+				
+				ctx5.beginPath();
+				//ctx.strokeStyle="red";
+				ctx5.fillStyle= "#ff9999";
+				//ctx.lineWidth= 16;				
+				ctx5.arc(this.x +7, this.y, 7, 0, 2*Math.PI, false);
+				ctx5.fill();
+				//ctx.stroke();
+			};	
+			
+		
+		}
+		function draw5(){
+			
+			ctx5.clearRect(0, 0,w, h);
+			ctx5.save();
+			var myLine= new BaseLine5(w/2, h/2, 3*w/4);
+			myLine.show();
+			
+			var tre=new Lines5(w/2, h/2,65, 3*w/4);
+			tre.show();
+			tre.move();
+			ctx5.restore();
+			
+		 }
+		setInterval(draw5, 10);
+
+    </script>
+			</div>
+
+		</div>
+		
+		<div class="move">
+			<p><a href="secondpage.html"   >Move on to the second page</a> </p>
+		
+		</div>
+
+	</body>
+</html>

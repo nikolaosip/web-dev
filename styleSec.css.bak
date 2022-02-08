@@ -1,0 +1,62 @@
+﻿*{
+	box-sizing:border-box;
+
+	}
+	
+body {
+    margin: 0;   
+   width:100%;
+   height:100%;
+   
+   content: "";
+  background: url(3-color.png);
+  background-size: cover auto;
+  background-repeat: cover;
+  background-attachment: fixed;
+ background-color:#ffcc99;
+  background-blend-mode: color-dodge;
+  
+  
+}
+
+/*html{
+	min-height: 100%;
+	background: url(3-color.png) no-repeat center center fixed; 
+         background-size: cover;
+	
+} 
+
+png{
+	 opacity: 0.1;
+	
+	
+}
+
+body::after {
+    
+}
+*/
+.myhead{
+	
+	text-align:center;
+}
+
+
+
+.myGrid{
+	
+	display:grid;
+	width:85%;	
+        grid-template-rows: repeat(auto,minmax(40px,1fr));
+        background-color: #2196F3;
+        margin: 0 auto;
+	
+}
+
+.item {
+     justify-self: center;
+     width:85%;
+     text-align:center;
+     border:4px solid #cccc00;
+}
+
